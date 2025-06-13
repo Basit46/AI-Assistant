@@ -7,3 +7,9 @@ export type MessageType = {
   responseType?: string;
   reaction?: "like" | "dislike";
 };
+
+export type chatHistoryType = {
+  id: string;
+  timestamp: number;
+  mainUserMsg: string;
+};

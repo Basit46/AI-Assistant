@@ -1,12 +1,26 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import UserMessage from "./UserMessage";
 import AiMessage from "./AiMessage";
 import { useGlobalStore } from "../store/GlobalStore";
+import { useParams } from "next/navigation";
 
 const ChatWrapper = () => {
-  const { messages } = useGlobalStore();
+  const { messages, allMessages, addBulkMessage, resetMessages } =
+    useGlobalStore();
+  const { id } = useParams();
+
+  useEffect(() => {
+    if (id) {
+      resetMessages();
+      const filteredMsgs = allMessages.filter((msg) => msg.groupId == id);
+      addBulkMessage(filteredMsgs);
+    } else {
+      return;
+    }
+  }, [id]);
+
   return (
     <div className="w-[60%] flex-1 pt-[40px] min-h-[50%]">
       <div>

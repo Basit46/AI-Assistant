@@ -7,6 +7,7 @@ import { formatTimestamp, getGroqChatCompletion } from "../utils";
 import ReactMarkdown from "react-markdown";
 import { v4 } from "uuid";
 import { useGlobalStore } from "../store/GlobalStore";
+import { useParams } from "next/navigation";
 
 const AiMessage = ({ msg }: { msg: MessageType }) => {
   const {
@@ -14,9 +15,9 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
     deleteMessage,
     addReactionToMsg,
     addMessage,
-    isLoading,
     setIsLoading,
   } = useGlobalStore();
+  const { id } = useParams();
 
   //Copying message
   const [isCopied, setIsCopied] = useState(false);
@@ -50,7 +51,7 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
       timestamp: new Date().getTime(),
       role: "ai",
       content: completion.choices[0]?.message?.content || "",
-      groupId: "",
+      groupId: typeof id == "string" ? id : id[0],
       responseType: "",
     });
 

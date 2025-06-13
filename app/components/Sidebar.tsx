@@ -3,26 +3,28 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
 import {
   LuBot,
   LuMessageSquareText,
   LuMessagesSquare,
+  LuPlus,
   LuSettings,
   LuSparkles,
 } from "react-icons/lu";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import { useGlobalStore } from "../store/GlobalStore";
 
 const sections = [
+  // {
+  //   path: "/",
+  //   name: "Chat",
+  //   icon: <LuMessagesSquare />,
+  // },
   {
-    path: "/",
-    name: "Chat",
-    icon: <LuMessagesSquare />,
-  },
-  {
-    path: "/chats",
+    path: "/history",
     name: "Chat History",
     icon: <LuMessageSquareText />,
   },
@@ -40,7 +42,15 @@ const sections = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { resetMessages } = useGlobalStore();
+
   const [isExpanded, setIsExpanded] = useState(true);
+
+  const handleNewChat = () => {
+    resetMessages();
+    router.push("/");
+  };
 
   return (
     <div
@@ -67,6 +77,20 @@ const Sidebar = () => {
       <div className="py-[30px] flex-1 flex flex-col justify-between">
         {/* Navigations */}
         <div className="space-y-[10px]">
+          <button
+            onClick={handleNewChat}
+            className={`${
+              isExpanded ? "w-full" : "w-[48px]"
+            } h-[48px] flex items-center gap-[16px] rounded-[8px] px-[12px] whitespace-nowrap shrink-0 [&_svg]:size-[24px] [&_svg]:shrink-0`}
+          >
+            <LuPlus />
+            {isExpanded && (
+              <p className="text-[14px] font-semibold whitespace-nowrap shrink-0">
+                New Chat
+              </p>
+            )}
+          </button>
+
           {sections.map((item, i) => {
             const isActive =
               item.path == "/"

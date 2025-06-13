@@ -32,7 +32,7 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
             <Header />
             <div
               ref={messagesContainerRef}
-              className="h-[calc(100vh-80px)] w-full overflow-y-auto"
+              className="h-[calc(100vh-80px)] w-full overflow-y-auto scroll-smooth"
             >
               <div className="h-fit">{children}</div>
             </div>

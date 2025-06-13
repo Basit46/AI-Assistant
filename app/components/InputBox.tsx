@@ -7,26 +7,52 @@ import { useGlobalStore } from "../store/GlobalStore";
 import { FaStopCircle } from "react-icons/fa";
 import { v4 } from "uuid";
 import { getGroqChatCompletion } from "../utils";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 const InputBox = () => {
-  const { inputValue, setInputValue, addMessage, isLoading, setIsLoading } =
-    useGlobalStore();
+  const router = useRouter();
+  const pathname = usePathname();
+  const { id } = useParams();
+  const {
+    inputValue,
+    setInputValue,
+    addMessage,
+    isLoading,
+    setIsLoading,
+    chatHistory,
+    addChatToHistory,
+  } = useGlobalStore();
 
   const handleAddMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const groupId = id || v4();
+
+    const isChatAlreadyAdded = chatHistory.find((chat) => chat.id == groupId);
+    if (!isChatAlreadyAdded) {
+      addChatToHistory({
+        id: typeof groupId == "string" ? groupId : groupId[0],
+        mainUserMsg: inputValue,
+      });
+    }
+
+    if (pathname == "/") {
+      router.push(`/chats/${groupId}`);
+    }
+
     addMessage({
       id: v4(),
+      groupId: typeof groupId == "string" ? groupId : groupId[0],
       timestamp: new Date().getTime(),
       role: "user",
       content: inputValue,
     });
 
     setInputValue("");
-    main();
+    main(typeof groupId == "string" ? groupId : groupId[0]);
   };
 
-  const main = async () => {
+  const main = async (groupId: string) => {
     setIsLoading(true);
     const completion = await getGroqChatCompletion(inputValue);
     addMessage({
@@ -34,7 +60,7 @@ const InputBox = () => {
       timestamp: new Date().getTime(),
       role: "ai",
       content: completion.choices[0]?.message?.content || "",
-      groupId: "",
+      groupId: groupId,
       responseType: "",
     });
 
@@ -46,7 +72,7 @@ const InputBox = () => {
   };
 
   return (
-    <div className="mt-[30px] bg-background-dashboard w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
+    <div className="mt-[30px] sticky bottom-0 bg-background-dashboard w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
       <form
         onSubmit={handleAddMessage}
         className="flex items-center w-full h-[48px] rounded-[12px] bg-[#3B3D40] overflow-hidden"
