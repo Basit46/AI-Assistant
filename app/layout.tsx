@@ -11,7 +11,7 @@ const ambit = localFont({
       style: "normal",
     },
     {
-      path: "./fonts/Ambit Semibold.otf",
+      path: "./fonts/Ambit SemiBold.otf",
       weight: "600",
       style: "normal",
     },
