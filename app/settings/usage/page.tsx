@@ -1,22 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import { useGlobalStore } from "@/app/store/GlobalStore";
+import React, { useMemo, useState } from "react";
 
 const Usage = () => {
-  const sections = [
-    {
-      name: "Total Conversation",
-      value: "04",
-    },
-    {
-      name: "Total Credits Used",
-      value: "00",
-    },
-    {
-      name: "Percent of Active days",
-      value: "16%",
-    },
-  ];
+  const { allMessages } = useGlobalStore();
+
+  const sections = useMemo(() => {
+    const now = Date.now();
+    const sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000;
+
+    const recentMessages = allMessages.filter(
+      (msg) => new Date(msg.timestamp).getTime() >= sevenDaysAgo
+    );
+
+    return [
+      {
+        name: "Total Conversation (Last 7 Days)",
+        value: recentMessages.filter((msg) => msg.role === "ai").length,
+      },
+    ];
+  }, [allMessages]);
 
   return (
     <div className="w-[90%] min-h-[100px] border border-[#8692A633] rounded-[12px] p-[24px]">
@@ -76,17 +80,44 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { date: "07/06/2025", conversations: 12 },
-  { date: "08/06/2025", conversations: 8 },
-  { date: "09/06/2025", conversations: 15 },
-  { date: "10/06/2025", conversations: 22 },
-  { date: "11/06/2025", conversations: 18 },
-  { date: "12/06/2025", conversations: 25 },
-  { date: "13/06/2025", conversations: 9 },
-];
-
 function ActivityChart() {
+  const useLast7DaysData = () => {
+    const { allMessages } = useGlobalStore();
+
+    return useMemo(() => {
+      const today = new Date();
+      const counts = new Map();
+
+      // Pre-fill last 7 days
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(today);
+        date.setDate(today.getDate() - i);
+        const key = date.toLocaleDateString("en-GB");
+        counts.set(key, {
+          date: key,
+          conversations: 0,
+          timestamp: date.getTime(),
+        });
+      }
+
+      // Count messages
+      allMessages.forEach((msg) => {
+        if (msg.role !== "ai") return;
+        const ts = new Date(msg.timestamp);
+        const key = ts.toLocaleDateString("en-GB");
+        const entry = counts.get(key);
+        if (entry) entry.conversations += 1;
+      });
+
+      // Convert to sorted array using stored timestamps
+      return Array.from(counts.values())
+        .sort((a, b) => a.timestamp - b.timestamp)
+        .map(({ date, conversations }) => ({ date, conversations }));
+    }, [allMessages]);
+  };
+
+  const data = useLast7DaysData();
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart

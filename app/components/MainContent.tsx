@@ -6,6 +6,7 @@ import Header from "./Header";
 import { usePathname } from "next/navigation";
 import InputBox from "./InputBox";
 import { useGlobalStore } from "../store/GlobalStore";
+import Logout from "./Logout";
 
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -37,6 +38,7 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
               <div className="h-fit">{children}</div>
             </div>
           </div>
+          <Logout />
         </>
       ) : (
         <>{children}</>

@@ -33,7 +33,7 @@ const SignUp = () => {
             </p>
           </div>
 
-          <div className="mt-[50px]">
+          <div className="mt-[100px]">
             <h1 className="text-[32px] font-bold leading-[100%]">Login</h1>
             <p className="text-[18px] font-semibold text-medium-grey">
               Add your credentials to log in
@@ -55,7 +55,7 @@ const SignUp = () => {
 
           <p className="mt-[20px] text-[14px] font-semibold text-center">
             Don't have an Account?{" "}
-            <Link href="/signin" className="text-button-primary-purple">
+            <Link href="/auth/signup" className="text-button-primary-purple">
               Signup
             </Link>
           </p>

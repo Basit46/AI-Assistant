@@ -80,7 +80,7 @@ export const useGlobalStore = create<GlobalStore>()(
       aiCharacter: characters[0],
       setAiCharacter: (value) => set({ aiCharacter: value }),
 
-      tone: "formal",
+      tone: "casual",
       setTone: (value) => set({ tone: value }),
 
       depthLevel: "moderate",

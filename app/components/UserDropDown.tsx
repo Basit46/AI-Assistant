@@ -8,10 +8,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import Logout from "./Logout";
+import { useAuthStore } from "../store/AuthStore";
 
 export function UserDropDown() {
   const router = useRouter();
+  const { setOpenLogout } = useAuthStore();
 
   return (
     <DropdownMenu>
@@ -40,7 +41,12 @@ export function UserDropDown() {
           Customize Bot
         </DropdownMenuItem>
 
-        <Logout />
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onClick={() => setOpenLogout(true)}
+        >
+          Logout
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

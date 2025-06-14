@@ -18,11 +18,6 @@ const sections = [
     name: "Usage",
     path: "/settings/usage",
   },
-
-  {
-    name: "Plan and billing",
-    path: "/settings/billings",
-  },
 ];
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
