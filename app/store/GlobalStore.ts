@@ -1,6 +1,7 @@
 import { chatHistoryType, MessageType } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { characters } from "../constants";
 
 interface GlobalStore {
   inputValue: string;
@@ -17,6 +18,9 @@ interface GlobalStore {
 
   isLoading: boolean;
   setIsLoading: (value: boolean) => void;
+
+  aiCharacter: (typeof characters)[0];
+  setAiCharacter: (value: (typeof characters)[0]) => void;
 
   tone: string;
   setTone: (value: string) => void;
@@ -72,6 +76,9 @@ export const useGlobalStore = create<GlobalStore>()(
 
       isLoading: false,
       setIsLoading: (value) => set({ isLoading: value }),
+
+      aiCharacter: characters[0],
+      setAiCharacter: (value) => set({ aiCharacter: value }),
 
       tone: "formal",
       setTone: (value) => set({ tone: value }),

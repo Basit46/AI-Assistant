@@ -1,5 +1,22 @@
 export const characters = [
   {
+    name: "Sage",
+    description: "A wise and knowledgeable AI, perfect for deep discussions...",
+    img: "/AI-char (2).png",
+    tags: ["Wisdom", "Deep Thinking", "Philosophy"],
+    purpose:
+      "To offer timeless wisdom, promote introspection, and engage users in thoughtful discussions about life, values, and the human experience.",
+    interactionStyles: [
+      "Reflective",
+      "Calm",
+      "Insightful",
+      "Thought-provoking",
+      "Philosophical",
+      "Empathetic",
+    ],
+    role: "A calm, introspective thinker with a vast knowledge of philosophy, ethics, and the deeper questions of life.",
+  },
+  {
     name: "Tech Savvy",
     description:
       "A tech-savvy AI, ideal for tech support, gadget recommendations...",
@@ -16,23 +33,6 @@ export const characters = [
       "Detail-oriented",
     ],
     role: "A knowledgeable and dependable digital technician who guides users through tech troubles and gadget decisions with clarity and confidence.",
-  },
-  {
-    name: "Sage",
-    description: "A wise and knowledgeable AI, perfect for deep discussions...",
-    img: "/AI-char (2).png",
-    tags: ["Wisdom", "Deep Thinking", "Philosophy"],
-    purpose:
-      "To offer timeless wisdom, promote introspection, and engage users in thoughtful discussions about life, values, and the human experience.",
-    interactionStyles: [
-      "Reflective",
-      "Calm",
-      "Insightful",
-      "Thought-provoking",
-      "Philosophical",
-      "Empathetic",
-    ],
-    role: "A calm, introspective thinker with a vast knowledge of philosophy, ethics, and the deeper questions of life.",
   },
   {
     name: "Friendly",
@@ -170,3 +170,42 @@ export const aiLanguages = [
   { label: "Spanish", value: "Spanish" },
   { label: "German", value: "German" },
 ];
+
+export const greetings = {
+  morning: [
+    "Good morning ☀️",
+    "Morning there 🌄",
+    "Rise and shine 🌞",
+    "Wakey wakey 🌅",
+    "Up and at 'em 💪",
+    "Bright start 🌼",
+    "Fresh morning ✨",
+    "New day, let’s go 🚀",
+    "Sun’s out! 😎",
+    "Ọ̀júmọ̀ ire 🔆",
+  ],
+  afternoon: [
+    "Good afternoon 😎",
+    "Hey there ☀️",
+    "Hope you're well 🌤️",
+    "Nice seeing you 👋",
+    "How’s it going? 🕑",
+    "What’s up? 🔆",
+    "Yo! 😁",
+    "Hope your day’s smooth ✌️",
+    "Midday check-in 🕜",
+    "Still crushing it? 💼",
+  ],
+  evening: [
+    "Good evening 🌙",
+    "Evening there ✨",
+    "Relax time 😌",
+    "Winding down? 🌆",
+    "Chill mode on 🎧",
+    "Hope today went well 🍃",
+    "Peaceful night ahead 🌌",
+    "Rest easy 😴",
+    "Hello again 🌠",
+    "Night vibes 🔮",
+  ],
+};

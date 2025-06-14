@@ -1,9 +1,16 @@
+"use client";
+
 import { characters } from "@/app/constants";
+import { useGlobalStore } from "@/app/store/GlobalStore";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 
 export function AiPersonality({ char }: { char: (typeof characters)[0] }) {
+  const { aiCharacter, setAiCharacter } = useGlobalStore();
+
+  const inUse = aiCharacter.name == char.name;
+
   return (
     <Dialog>
       <DialogTrigger>
@@ -54,7 +61,12 @@ export function AiPersonality({ char }: { char: (typeof characters)[0] }) {
             </h1>
             <p className="w-[90%] text-center">{char.description}</p>
           </div>
-          <Button className="w-[196px] h-[48px] text-[16px]">Chat now</Button>
+          <Button
+            onClick={() => setAiCharacter(char)}
+            className="w-[196px] h-[48px] text-[16px]"
+          >
+            {inUse ? "In use" : "Chat now"}
+          </Button>
         </div>
 
         <div className="glass-effect flex-1 h-full rounded-r-[16px] py-[32px] px-[24px] flex flex-col gap-[48px]">

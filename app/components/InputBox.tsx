@@ -21,6 +21,10 @@ const InputBox = () => {
     setIsLoading,
     chatHistory,
     addChatToHistory,
+    aiCharacter,
+    tone,
+    depthLevel,
+    responseLanguage,
   } = useGlobalStore();
 
   const handleAddMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +58,13 @@ const InputBox = () => {
 
   const main = async (groupId: string) => {
     setIsLoading(true);
-    const completion = await getGroqChatCompletion(inputValue);
+    const completion = await getGroqChatCompletion(
+      inputValue,
+      aiCharacter.name,
+      tone,
+      depthLevel,
+      responseLanguage
+    );
     addMessage({
       id: completion.id || v4(),
       timestamp: new Date().getTime(),

@@ -48,8 +48,8 @@ const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const handleNewChat = () => {
-    resetMessages();
     router.push("/");
+    resetMessages();
   };
 
   return (

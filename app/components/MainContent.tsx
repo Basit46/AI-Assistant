@@ -18,7 +18,7 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const container = messagesContainerRef.current;
-    if (container) {
+    if (container && pathname == "/") {
       container.scrollTop = container.scrollHeight;
     }
   }, [messages]);

@@ -19,12 +19,18 @@ const groq = new Groq({
   apiKey: process.env.NEXT_PUBLIC_GROK_API_KEY,
   dangerouslyAllowBrowser: true,
 });
-export const getGroqChatCompletion = async (value: string) => {
+export const getGroqChatCompletion = async (
+  value: string,
+  aiCharacter?: string,
+  tone?: string,
+  depthLevel?: string,
+  responseLanguage?: string
+) => {
   return groq.chat.completions.create({
     messages: [
       {
         role: "system",
-        content: "You are a helpful assistant.",
+        content: `You are a helpful assistant. Reply my prompts as if you are a ${aiCharacter}, your tone should be ${tone}, and your response should have a depth level of ${depthLevel}, reply me in this ${responseLanguage} language`,
       },
 
       {
