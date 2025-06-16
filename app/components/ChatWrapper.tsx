@@ -5,21 +5,61 @@ import UserMessage from "./UserMessage";
 import AiMessage from "./AiMessage";
 import { useGlobalStore } from "../store/GlobalStore";
 import { useParams } from "next/navigation";
+import { useAuthStore } from "../store/AuthStore";
+import { supabase } from "../utils/supabase";
 
 const ChatWrapper = () => {
-  const { messages, allMessages, addBulkMessage, resetMessages } =
-    useGlobalStore();
+  const {
+    messages,
+    allMessages,
+    addBulkMessage,
+    resetMessages,
+    initAllMessages,
+  } = useGlobalStore();
   const { id } = useParams();
+  const { user } = useAuthStore();
 
   useEffect(() => {
-    if (id) {
+    if (!user?.id) return;
+    getMsgsFromSupabase(user.id);
+  }, [user?.id]);
+
+  const getMsgsFromSupabase = async (uid: string) => {
+    const { data, error } = await supabase
+      .from("All messages")
+      .select()
+      .eq("user_id", uid)
+      .order("timestamp", { ascending: true });
+
+    console.log(data);
+
+    if (error) {
+      console.error("Error fetching messages:", error.message);
+      return;
+    }
+
+    initAllMessages(
+      (data ?? []).map((row) => ({
+        id: row?.id,
+        timestamp: row?.timestamp,
+        role: row?.role,
+        content: row?.content,
+        groupId: row?.groupId,
+        responseType: row?.responseType,
+        reaction: row?.reaction,
+      }))
+    );
+  };
+
+  useEffect(() => {
+    if (id && user) {
       resetMessages();
-      const filteredMsgs = allMessages.filter((msg) => msg.groupId == id);
+      const filteredMsgs = allMessages?.filter((msg) => msg.groupId == id);
       addBulkMessage(filteredMsgs);
     } else {
       return;
     }
-  }, [id]);
+  }, [id, user, allMessages]);
 
   return (
     <div className="w-[60%] flex-1 pt-[40px] min-h-[50%]">

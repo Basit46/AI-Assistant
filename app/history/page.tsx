@@ -1,12 +1,41 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import DateLabel from "../components/DateLabel";
 import { useGlobalStore } from "../store/GlobalStore";
 import Chat from "./components/Chat";
+import { supabase } from "../utils/supabase";
+import { useAuthStore } from "../store/AuthStore";
 
 const History = () => {
-  const { chatHistory } = useGlobalStore();
+  const { chatHistory, initChatHistory } = useGlobalStore();
+  const { user } = useAuthStore();
+
+  useEffect(() => {
+    if (!user?.id) return;
+    getChatsFromSupabase(user.id);
+  }, [user?.id]);
+
+  const getChatsFromSupabase = async (uid: string) => {
+    const { data, error } = await supabase
+      .from("chat_history")
+      .select()
+      .eq("user_id", uid)
+      .order("timestamp", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching chat history:", error.message);
+      return;
+    }
+
+    initChatHistory(
+      (data ?? []).map((row) => ({
+        id: row.chat_id,
+        mainUserMsg: row.mainUserMsg,
+        timestamp: row.timestamp,
+      }))
+    );
+  };
 
   function isSameUTCDate(a: Date, b: Date): boolean {
     return (

@@ -2,12 +2,14 @@ import { chatHistoryType, MessageType } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { characters } from "../constants";
+import { supabase } from "../utils/supabase";
 
 interface GlobalStore {
   inputValue: string;
   setInputValue: (value: string) => void;
 
   allMessages: MessageType[];
+  initAllMessages: (m: MessageType[]) => void;
 
   messages: MessageType[];
   addMessage: (msg: MessageType) => void;
@@ -33,6 +35,7 @@ interface GlobalStore {
 
   chatHistory: chatHistoryType[];
   addChatToHistory: (values: Omit<chatHistoryType, "timestamp">) => void;
+  initChatHistory: (c: chatHistoryType[]) => void;
   deleteChatFromHistory: (id: string) => void;
 }
 
@@ -43,6 +46,11 @@ export const useGlobalStore = create<GlobalStore>()(
       setInputValue: (value) => set({ inputValue: value }),
 
       allMessages: [],
+      initAllMessages: (m) => {
+        set((state) => ({
+          allMessages: m,
+        }));
+      },
 
       messages: [],
       addMessage: (msg) => {
@@ -102,6 +110,11 @@ export const useGlobalStore = create<GlobalStore>()(
           ],
         }));
       },
+      initChatHistory: (c) => {
+        set((state) => ({
+          chatHistory: c,
+        }));
+      },
       deleteChatFromHistory: (id) => {
         set((state) => ({
           chatHistory: state.chatHistory.filter((chat) => chat.id !== id),
@@ -109,10 +122,10 @@ export const useGlobalStore = create<GlobalStore>()(
       },
     }),
     {
-      name: "ai_chat_xsv", // localStorage key
+      name: "ai_chat_xsv",
       partialize: (state) => ({
-        allMessages: state.allMessages,
-        chatHistory: state.chatHistory,
+        // allMessages: state.allMessages,
+        // chatHistory: state.chatHistory,
       }),
     }
   )

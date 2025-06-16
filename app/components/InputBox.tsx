@@ -8,6 +8,8 @@ import { FaStopCircle } from "react-icons/fa";
 import { v4 } from "uuid";
 import { getGroqChatCompletion } from "../utils";
 import { useParams, usePathname, useRouter } from "next/navigation";
+import { supabase } from "../utils/supabase";
+import { useAuthStore } from "../store/AuthStore";
 
 const InputBox = () => {
   const router = useRouter();
@@ -26,8 +28,9 @@ const InputBox = () => {
     depthLevel,
     responseLanguage,
   } = useGlobalStore();
+  const { user } = useAuthStore();
 
-  const handleAddMessage = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAddMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const groupId = id || v4();
@@ -39,6 +42,11 @@ const InputBox = () => {
         mainUserMsg: inputValue,
       });
     }
+    await supabase.from("chat_history").upsert({
+      chat_id: typeof groupId == "string" ? groupId : groupId[0],
+      mainUserMsg: inputValue,
+      user_id: user?.id,
+    });
 
     if (pathname == "/") {
       router.push(`/chats/${groupId}`);
@@ -50,6 +58,13 @@ const InputBox = () => {
       timestamp: new Date().getTime(),
       role: "user",
       content: inputValue,
+    });
+
+    await supabase.from("All messages").upsert({
+      groupId: typeof groupId == "string" ? groupId : groupId[0],
+      role: "user",
+      content: inputValue,
+      user_id: user?.id,
     });
 
     setInputValue("");
@@ -72,6 +87,13 @@ const InputBox = () => {
       content: completion.choices[0]?.message?.content || "",
       groupId: groupId,
       responseType: "",
+    });
+    await supabase.from("All messages").upsert({
+      role: "ai",
+      content: completion.choices[0]?.message?.content || "",
+      groupId: groupId,
+      responseType: "",
+      user_id: user?.id,
     });
 
     setIsLoading(false);
