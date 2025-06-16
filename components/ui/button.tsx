@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-
+import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-button-primary-purple text-button-primary-text ",
+        default: "bg-button-primary-purple text-button-primary-text",
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
@@ -37,20 +37,41 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  loading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      loading = false, // ← take loading
+      children, // ← grab children so we can swap them out
+      disabled,
+      ...props
+    },
+    ref
+  ) => {
     const Comp = asChild ? Slot : "button";
+
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          loading && "cursor-not-allowed opacity-80"
+        )}
+        disabled={loading || disabled}
         {...props}
-      />
+      >
+        {loading ? <Loader2 className="size-4 animate-spin" /> : children}
+      </Comp>
     );
   }
 );
+
 Button.displayName = "Button";
 
 export { Button, buttonVariants };

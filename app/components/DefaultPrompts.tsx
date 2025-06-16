@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useMemo } from "react";
 import Image from "next/image";
 import { greetings } from "../constants";
 
@@ -6,7 +8,10 @@ const DefaultPrompts = () => {
   const hour = new Date().getHours();
   const section = hour < 12 ? "morning" : hour < 18 ? "afternoon" : "evening";
 
-  const randomIndex = Math.floor(Math.random() * greetings[section].length);
+  const randomIndex = useMemo(
+    () => Math.floor(Math.random() * greetings[section].length),
+    [section]
+  );
 
   return (
     <div className="w-[60%] absolute left-1/2 top-1/2 mt-[-50px] -translate-x-1/2 -translate-y-1/2">

@@ -12,7 +12,7 @@ import { useAuthStore } from "../store/AuthStore";
 
 export function UserDropDown() {
   const router = useRouter();
-  const { setOpenLogout } = useAuthStore();
+  const { setOpenLogout, user } = useAuthStore();
 
   return (
     <DropdownMenu>
@@ -26,7 +26,7 @@ export function UserDropDown() {
         align="end"
       >
         <DropdownMenuItem className="focus:bg-transparent focus:text-main-white">
-          <p>hassanbasitope@gmail.com</p>
+          <p className="">{user?.email}</p>
         </DropdownMenuItem>
         <DropdownMenuItem
           className="cursor-pointer"

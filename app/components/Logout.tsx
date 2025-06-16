@@ -12,13 +12,13 @@ import React from "react";
 import { useAuthStore } from "../store/AuthStore";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { supabase } from "../utils/supabase";
 
 const Logout = () => {
-  const router = useRouter();
   const { openLogout, setOpenLogout } = useAuthStore();
 
   const handleLogout = () => {
-    router.push("/auth/login");
+    supabase.auth.signOut();
   };
 
   return (

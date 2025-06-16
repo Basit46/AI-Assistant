@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import InputBox from "./InputBox";
 import { useGlobalStore } from "../store/GlobalStore";
 import Logout from "./Logout";
+import AuthProvider from "../providers/AuthProviders";
 
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
@@ -25,25 +26,27 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
   }, [messages]);
 
   return (
-    <div className="w-full h-full flex">
-      {!hideExtras ? (
-        <>
-          <Sidebar />
-          <div className="relative flex-1 h-screen ">
-            <Header />
-            <div
-              ref={messagesContainerRef}
-              className="h-[calc(100vh-80px)] w-full overflow-y-auto scroll-smooth"
-            >
-              <div className="h-fit">{children}</div>
+    <AuthProvider>
+      <div className="w-full h-full flex">
+        {!hideExtras ? (
+          <>
+            <Sidebar />
+            <div className="relative flex-1 h-screen ">
+              <Header />
+              <div
+                ref={messagesContainerRef}
+                className="h-[calc(100vh-80px)] w-full overflow-y-auto scroll-smooth"
+              >
+                <div className="h-fit">{children}</div>
+              </div>
             </div>
-          </div>
-          <Logout />
-        </>
-      ) : (
-        <>{children}</>
-      )}
-    </div>
+            <Logout />
+          </>
+        ) : (
+          <>{children}</>
+        )}
+      </div>
+    </AuthProvider>
   );
 };
 
