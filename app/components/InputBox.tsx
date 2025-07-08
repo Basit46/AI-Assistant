@@ -80,17 +80,28 @@ const InputBox = () => {
       depthLevel,
       responseLanguage
     );
+    console.log(completion);
+    let finalResponse = "";
+
+    for await (const chunk of completion) {
+      const content = chunk.choices?.[0]?.delta?.content;
+      if (content) {
+        finalResponse += content;
+      }
+    }
+
+    console.log(finalResponse);
     addMessage({
-      id: completion.id || v4(),
+      id: v4(),
       timestamp: new Date().getTime(),
       role: "ai",
-      content: completion.choices[0]?.message?.content || "",
+      content: finalResponse || "",
       groupId: groupId,
       responseType: "",
     });
     await supabase.from("All messages").upsert({
       role: "ai",
-      content: completion.choices[0]?.message?.content || "",
+      content: finalResponse || "",
       groupId: groupId,
       responseType: "",
       user_id: user?.id,
@@ -115,6 +126,7 @@ const InputBox = () => {
           placeholder="Enter a prompt here"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          autoFocus
         />
 
         <div className="w-[1px] h-[20px] bg-[linear-gradient(90deg,_#8692A6_0%,_#343840_100%)]"></div>

@@ -39,5 +39,6 @@ export const getGroqChatCompletion = async (
       },
     ],
     model: "llama-3.3-70b-versatile",
+    stream: true,
   });
 };

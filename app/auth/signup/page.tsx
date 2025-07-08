@@ -89,6 +89,7 @@ const SignUp = () => {
                 }
                 required
                 placeholder="Enter your name"
+                autoComplete="false"
               />
             </div>
             <div>
@@ -102,6 +103,7 @@ const SignUp = () => {
                 required
                 placeholder="Enter your email"
                 type="email"
+                autoComplete="false"
               />
             </div>
             <div>

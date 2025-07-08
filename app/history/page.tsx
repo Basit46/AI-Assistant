@@ -93,7 +93,7 @@ const History = () => {
 
         {olderChats.length > 0 && (
           <div className="w-full">
-            <DateLabel date="yesterday" />
+            <DateLabel date="Others" />
             <div className="pt-[40px] flex flex-col gap-[20px]">
               {olderChats.map((chat, i) => (
                 <Chat key={chat.id} chat={chat} />

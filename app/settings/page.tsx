@@ -34,11 +34,20 @@ const Settings = () => {
         <div className="mt-[20px] w-full flex gap-[20px]">
           <div className="w-[40%]">
             <Label htmlFor="fullName">Your fullname*</Label>
-            <Input id="fullName" placeholder="Enter your name" />
+            <Input
+              id="fullName"
+              placeholder="Enter your name"
+              autoComplete="false"
+            />
           </div>
           <div className="w-[40%]">
             <Label htmlFor="email">Your email*</Label>
-            <Input id="email" placeholder="Enter your email" type="email" />
+            <Input
+              id="email"
+              placeholder="Enter your email"
+              type="email"
+              autoComplete="false"
+            />
           </div>
         </div>
 
