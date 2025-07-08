@@ -6,6 +6,7 @@ import { useGlobalStore } from "../store/GlobalStore";
 import Chat from "./components/Chat";
 import { supabase } from "../utils/supabase";
 import { useAuthStore } from "../store/AuthStore";
+import { useRouter } from "next/navigation";
 
 const History = () => {
   const { chatHistory, initChatHistory } = useGlobalStore();
@@ -74,9 +75,11 @@ const History = () => {
         <div className="w-full">
           <DateLabel date="today" />
           <div className="pt-[40px] flex flex-col gap-[20px]">
-            {todaysChats.map((chat, i) => (
-              <Chat key={chat.id} chat={chat} />
-            ))}
+            {todaysChats.length > 0 ? (
+              todaysChats.map((chat, i) => <Chat key={chat.id} chat={chat} />)
+            ) : (
+              <EmptyList />
+            )}
           </div>
         </div>
 
@@ -107,3 +110,19 @@ const History = () => {
 };
 
 export default History;
+
+const EmptyList = () => {
+  const router = useRouter();
+
+  return (
+    <div className="w-full h-fit bg-[#FFFFFF1A] rounded-[8px] border border-[#8692A633] p-[20px]">
+      <h1 className="text-[20px]">No history for today</h1>
+      <button
+        onClick={() => router.push("/")}
+        className="mt-[20px] bg-button-primary-purple text-main-black px-[20px] h-[40px] rounded-[8px]"
+      >
+        Start conversation
+      </button>
+    </div>
+  );
+};

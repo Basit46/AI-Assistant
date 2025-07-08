@@ -37,27 +37,6 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
     }
   }, [isCopied]);
 
-  //Handle reloading
-  const handleReload = async () => {
-    const userMessages = messages.filter((msg) => msg.role === "user");
-    const lastUserMessage = userMessages[userMessages.length - 1].content;
-
-    deleteMessage(msg.id);
-
-    setIsLoading(true);
-    const completion = await getGroqChatCompletion(lastUserMessage);
-    addMessage({
-      id: completion.id || v4(),
-      timestamp: new Date().getTime(),
-      role: "ai",
-      content: completion.choices[0]?.message?.content || "",
-      groupId: typeof id == "string" ? id : id[0],
-      responseType: "",
-    });
-
-    setIsLoading(false);
-  };
-
   return (
     <div className="flex flex-col gap-5">
       <div className="flex gap-[12px] items-center">
@@ -73,35 +52,16 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
       </div>
 
       <div className="min-w-[40%] min-h-[56px] border border-[#8692A633] rounded-[16px] bg-[#FFFFFF1A] p-[20px] flex flex-col gap-[10px]">
-        {/* <p className="text-[14px] text-[#F5F5F5]">{msg.content}</p> */}
-        <div className="ai-content">
+        <div className="ai-content prose text-white max-w-full">
           <ReactMarkdown>{msg.content}</ReactMarkdown>
         </div>
 
         <div className="flex items-center gap-[8px]">
           <button
-            onClick={() => addReactionToMsg(msg.id, "like")}
-            className="size-[20px] text-[12px] text-[#8692A6]"
-          >
-            <LuThumbsUp color={msg.reaction === "like" ? "green" : ""} />
-          </button>
-          <button
-            onClick={() => addReactionToMsg(msg.id, "dislike")}
-            className="size-[20px] text-[12px] text-[#8692A6]"
-          >
-            <LuThumbsDown color={msg.reaction === "dislike" ? "red" : ""} />
-          </button>
-          <button
             onClick={handleCopy}
             className="size-[20px] text-[12px] text-[#8692A6]"
           >
             {!isCopied ? <LuCopy /> : <LuCopyCheck />}
-          </button>
-          <button
-            onClick={handleReload}
-            className="size-[20px] text-[12px] text-[#8692A6]"
-          >
-            <AiOutlineReload />
           </button>
         </div>
       </div>

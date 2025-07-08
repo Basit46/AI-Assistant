@@ -3,11 +3,10 @@
 import React, { useEffect, useRef } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import { usePathname } from "next/navigation";
-import InputBox from "./InputBox";
-import { useGlobalStore } from "../store/GlobalStore";
 import Logout from "./Logout";
 import AuthProvider from "../providers/AuthProviders";
+import { usePathname } from "next/navigation";
+import { useGlobalStore } from "../store/GlobalStore";
 
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
