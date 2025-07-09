@@ -1,4 +1,5 @@
 import { useGlobalStore } from "@/app/store/GlobalStore";
+import { supabase } from "@/app/utils/supabase";
 import { chatHistoryType } from "@/types";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -34,12 +35,12 @@ const Chat = ({ chat }: { chat: chatHistoryType }) => {
         >
           <IoOpenOutline />
         </Link>
-        <button
+        {/* <button
           onClick={handleDelete}
           className="ml-[15px] w-[20px] h-full text-[red]"
         >
           <LuTrash2 />
-        </button>
+        </button> */}
       </div>
     </div>
   );

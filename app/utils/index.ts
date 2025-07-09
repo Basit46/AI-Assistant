@@ -30,7 +30,7 @@ export const getGroqChatCompletion = async (
     messages: [
       {
         role: "system",
-        content: `You are a helpful assistant. Reply my prompts as if you are a ${aiCharacter}, your tone should be ${tone}, and your response should have a depth level of ${depthLevel}, reply me in this ${responseLanguage} language`,
+        content: `You are a helpful assistant. Reply my prompts as if you are a ${aiCharacter}`,
       },
 
       {

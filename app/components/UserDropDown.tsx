@@ -18,7 +18,7 @@ export function UserDropDown() {
     <DropdownMenu>
       <DropdownMenuTrigger className="focus:outline-none">
         <div className="relative size-[48px] rounded-[8px] overflow-hidden">
-          <Image src="/avatar.jpg" fill className="object-cover" alt="avatar" />
+          <Image src="/avatar.png" fill className="object-cover" alt="avatar" />
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent

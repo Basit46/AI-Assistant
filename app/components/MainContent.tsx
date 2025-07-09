@@ -17,12 +17,12 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const container = messagesContainerRef.current;
-    if (container && pathname == "/") {
-      container.scrollTop = container.scrollHeight;
-    }
-  }, [messages]);
+  // useEffect(() => {
+  //   const container = messagesContainerRef.current;
+  //   if (container && pathname.startsWith("/chats/")) {
+  //     container.scrollTop = container.scrollHeight;
+  //   }
+  // }, [messages]);
 
   return (
     <AuthProvider>
@@ -34,6 +34,7 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
               <Header />
               <div
                 ref={messagesContainerRef}
+                id="scrollContainer"
                 className="h-[calc(100vh-80px)] w-full overflow-y-auto scroll-smooth"
               >
                 <div className="h-fit">{children}</div>

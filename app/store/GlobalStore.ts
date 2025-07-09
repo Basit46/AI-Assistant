@@ -2,7 +2,6 @@ import { chatHistoryType, MessageType } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { characters } from "../constants";
-import { supabase } from "../utils/supabase";
 
 interface GlobalStore {
   inputValue: string;

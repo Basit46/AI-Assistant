@@ -48,8 +48,18 @@ const InputBox = () => {
     }
   }, [transcript, listening]);
 
+  const scrollToBottom = () => {
+    const container = document.querySelector("#scrollContainer");
+    if (container && pathname.startsWith("/chats/")) {
+      container.scrollTop = container.scrollHeight;
+    }
+  };
+
   const handleAddMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!inputValue) {
+      return;
+    }
 
     const groupId = id || v4();
 
@@ -86,6 +96,7 @@ const InputBox = () => {
     });
 
     setInputValue("");
+    scrollToBottom();
     main(typeof groupId == "string" ? groupId : groupId[0]);
   };
 
@@ -98,9 +109,8 @@ const InputBox = () => {
       depthLevel,
       responseLanguage
     );
-    console.log(completion);
-    let finalResponse = "";
 
+    let finalResponse = "";
     for await (const chunk of completion) {
       const content = chunk.choices?.[0]?.delta?.content;
       if (content) {
@@ -108,7 +118,6 @@ const InputBox = () => {
       }
     }
 
-    console.log(finalResponse);
     addMessage({
       id: v4(),
       timestamp: new Date().getTime(),
@@ -126,6 +135,7 @@ const InputBox = () => {
     });
 
     setIsLoading(false);
+    scrollToBottom();
   };
 
   const handleStop = () => {

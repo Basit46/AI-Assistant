@@ -52,7 +52,7 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
       </div>
 
       <div className="min-w-[40%] min-h-[56px] border border-[#8692A633] rounded-[16px] bg-[#FFFFFF1A] p-[20px] flex flex-col gap-[10px]">
-        <div className="ai-content prose text-white max-w-full">
+        <div className="ai-content prose text-white max-w-full prose-invert">
           <ReactMarkdown>{msg.content}</ReactMarkdown>
         </div>
 
