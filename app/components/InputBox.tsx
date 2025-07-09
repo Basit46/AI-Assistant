@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SlMicrophone } from "react-icons/sl";
 import { VscSend } from "react-icons/vsc";
 import { useGlobalStore } from "../store/GlobalStore";
-import { FaStopCircle } from "react-icons/fa";
+import { FaMicrophoneAltSlash, FaStopCircle } from "react-icons/fa";
 import { v4 } from "uuid";
 import { getGroqChatCompletion } from "../utils";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { supabase } from "../utils/supabase";
 import { useAuthStore } from "../store/AuthStore";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
 const InputBox = () => {
   const router = useRouter();
@@ -29,6 +32,21 @@ const InputBox = () => {
     responseLanguage,
   } = useGlobalStore();
   const { user } = useAuthStore();
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+
+  useEffect(() => {
+    if (listening) {
+      setInputValue(transcript);
+    } else {
+      resetTranscript();
+    }
+  }, [transcript, listening]);
 
   const handleAddMessage = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -133,9 +151,14 @@ const InputBox = () => {
 
         <button
           type="button"
+          onClick={() => {
+            listening
+              ? SpeechRecognition.stopListening()
+              : SpeechRecognition.startListening();
+          }}
           className="w-[45px] h-full grid place-items-center"
         >
-          <SlMicrophone />
+          {listening ? <FaMicrophoneAltSlash /> : <SlMicrophone />}
         </button>
 
         {!isLoading ? (

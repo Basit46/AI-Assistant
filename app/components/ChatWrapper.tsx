@@ -31,7 +31,7 @@ const ChatWrapper = () => {
       .eq("user_id", uid)
       .order("timestamp", { ascending: true });
 
-    console.log(data);
+    // console.log(data);
 
     if (error) {
       console.error("Error fetching messages:", error.message);

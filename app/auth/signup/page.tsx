@@ -140,17 +140,6 @@ const SignUp = () => {
             </div>
           </form>
 
-          {/* <div className="my-[20px] flex items-center justify-between">
-            <div className="w-[40%] h-[1px] bg-[#F5F5F5]" />
-            <p>Or</p>
-            <div className="w-[40%] h-[1px] bg-[#F5F5F5]" />
-          </div>
-
-          <button className="w-full h-[56px] bg-[#181818] flex items-center justify-center gap-[40px] rounded-[8px] shadow-[0px_4px_4px_0px_#00000040]">
-            <FcGoogle className="size-[24px]" />
-            <p className="font-semibold">Register with Google</p>
-          </button> */}
-
           <p className="mt-[20px] text-[14px] font-semibold text-center">
             Already have an Account?{" "}
             <Link href="/auth/login" className="text-button-primary-purple">
