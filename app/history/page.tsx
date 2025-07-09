@@ -71,7 +71,7 @@ const History = () => {
 
   return (
     <div className="w-full h-full flex justify-center py-[40px]">
-      <div className="w-[60%] space-y-[40px]">
+      <div className="w-[90%] xmd:w-[60%] space-y-[40px]">
         <div className="w-full">
           <DateLabel date="today" />
           <div className="pt-[40px] flex flex-col gap-[20px]">

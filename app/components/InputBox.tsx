@@ -143,7 +143,7 @@ const InputBox = () => {
   };
 
   return (
-    <div className="mt-[30px] sticky bottom-0 bg-background-dashboard w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
+    <div className="mt-[30px] sticky bottom-0 bg-background-dashboard w-[90%] xmd:w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
       <form
         onSubmit={handleAddMessage}
         className="flex items-center w-full h-[48px] rounded-[12px] bg-[#3B3D40] overflow-hidden"

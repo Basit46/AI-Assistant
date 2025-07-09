@@ -16,7 +16,7 @@ const DefaultPrompts = () => {
   }, [section]);
 
   return (
-    <div className="w-[60%] absolute left-1/2 top-1/2 mt-[-50px] -translate-x-1/2 -translate-y-1/2">
+    <div className="w-[90%] xmd:w-[60%] absolute left-1/2 top-1/2 mt-[-50px] -translate-x-1/2 -translate-y-1/2">
       <div className="size-[48px] bg-light-white rounded-[8px] shadow-[0px_4px_4px_0px_#0000000A] grid place-items-center">
         <Image src="/logo.png" width={24} height={28} alt="logo" />
       </div>

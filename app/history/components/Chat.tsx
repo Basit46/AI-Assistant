@@ -23,7 +23,7 @@ const Chat = ({ chat }: { chat: chatHistoryType }) => {
     <div
       className={`${
         clicked ? "translate-x-[-100%] opacity-0 duration-300" : ""
-      } w-full h-[56px] rounded-[8px] bg-[#FFFFFF1A] border border-[#8692A633] pl-[20px] pr-[10px]`}
+      } w-full min-h-[46px] py-[10px] rounded-[8px] bg-[#FFFFFF1A] border border-[#8692A633] pl-[20px] pr-[10px] flex items-center`}
     >
       <div className="w-full h-full flex justify-between items-center">
         <p className="flex-1 text-[14px] text-light-white">

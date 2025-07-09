@@ -21,7 +21,7 @@ const Ai = () => {
           </p>
         </div>
 
-        <div className="mt-[10px] grid grid-cols-4 gap-5">
+        <div className="mt-[10px] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
           {characters.map((char, i) => (
             <AiPersonality char={char} key={i} />
           ))}

@@ -61,7 +61,7 @@ const SignUp = () => {
       />
 
       <div className="w-full h-full relative z-[2] backdrop-blur-[65px] px-[50px] py-[25px] flex justify-between">
-        <div className="w-[35%] h-full flex flex-col">
+        <div className="w-full mx-auto xl:mx-0 md:w-[60%] xl:w-[35%] h-full flex flex-col">
           <div className="flex gap-[8px] items-center">
             <Image src="/logo.png" width={42} height={45} alt="logo" />
             <p className="mt-[10px] text-[24px] font-semibold leading-none text-light-white">
@@ -148,7 +148,7 @@ const SignUp = () => {
           </p>
         </div>
 
-        <div className="relative w-1/2 h-full pl-[40px]">
+        <div className="hidden xl:block relative w-1/2 h-full pl-[40px]">
           <div className="w-full h-full relative rounded-[20px] overflow-hidden">
             <Image
               src="/woman.jpg"

@@ -6,23 +6,14 @@ import Header from "./Header";
 import Logout from "./Logout";
 import AuthProvider from "../providers/AuthProviders";
 import { usePathname } from "next/navigation";
-import { useGlobalStore } from "../store/GlobalStore";
 
 const MainContent = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  const { messages } = useGlobalStore();
 
   const hideExtras =
     pathname.startsWith("/auth") || pathname.startsWith("/onboarding");
 
   const messagesContainerRef = useRef<HTMLDivElement>(null);
-
-  // useEffect(() => {
-  //   const container = messagesContainerRef.current;
-  //   if (container && pathname.startsWith("/chats/")) {
-  //     container.scrollTop = container.scrollHeight;
-  //   }
-  // }, [messages]);
 
   return (
     <AuthProvider>

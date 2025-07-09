@@ -40,7 +40,7 @@ const Sidebar = () => {
   return (
     <div
       className={`${
-        isExpanded ? "w-[260px]" : "w-[118px] items-center"
+        isExpanded ? "w-[118px] xmd:w-[260px]" : "w-[118px] items-center"
       } relative duration-300 z-[2] h-full flex flex-col px-[20px] bg-[#FFFFFF1A] backdrop-blur-[24px] [box-shadow:0px_4px_17px_0px_#0000000A] border-r-[1.5px] border-r-[#8692A633]`}
     >
       {/* Toggle Expand Button */}
@@ -70,7 +70,7 @@ const Sidebar = () => {
           >
             <LuPlus />
             {isExpanded && (
-              <p className="text-[14px] font-semibold whitespace-nowrap shrink-0">
+              <p className="hidden xmd:block text-[14px] font-semibold whitespace-nowrap shrink-0">
                 New Chat
               </p>
             )}
@@ -89,12 +89,12 @@ const Sidebar = () => {
                 className={`${
                   isActive ? "bg-button-primary-purple text-main-black" : ""
                 } ${
-                  isExpanded ? "w-full" : "w-[48px]"
+                  isExpanded ? "w-[48px] xmd:w-full" : "w-[48px]"
                 } h-[48px] flex items-center gap-[16px] rounded-[8px] px-[12px] whitespace-nowrap shrink-0 [&_svg]:size-[24px] [&_svg]:shrink-0`}
               >
                 {item.icon}
                 {isExpanded && (
-                  <p className="text-[14px] font-semibold whitespace-nowrap shrink-0">
+                  <p className="hidden xmd:block text-[14px] font-semibold whitespace-nowrap shrink-0">
                     {item.name}
                   </p>
                 )}
@@ -116,7 +116,7 @@ const Sidebar = () => {
           >
             <LuSettings className="shrink-0 size-[24px]" />
             {isExpanded && (
-              <p className="text-[14px] font-semibold whitespace-nowrap shrink-0 leading-none">
+              <p className="hidden xmd:block text-[14px] font-semibold whitespace-nowrap shrink-0 leading-none">
                 AI Pesonality
               </p>
             )}
