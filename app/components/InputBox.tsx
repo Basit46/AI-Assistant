@@ -143,10 +143,10 @@ const InputBox = () => {
   };
 
   return (
-    <div className="mt-[30px] sticky bottom-0 bg-background-dashboard w-[90%] xmd:w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
+    <div className="mt-[30px] shrink-0 sticky bottom-0 bg-background-dashboard w-[90%] xmd:w-[60%] h-[100px] flex flex-col justify-between pb-[20px]">
       <form
         onSubmit={handleAddMessage}
-        className="flex items-center w-full h-[48px] rounded-[12px] bg-[#3B3D40] overflow-hidden"
+        className="flex items-center w-full h-[48px] shrink-0 rounded-[12px] bg-[#3B3D40] overflow-hidden"
       >
         <input
           type="text"
@@ -189,7 +189,7 @@ const InputBox = () => {
         )}
       </form>
 
-      <p className="text-[12px] text-medium-grey text-center">
+      <p className="text-[8px] md:text-[12px] text-medium-grey text-center">
         Free Research Preview. Bot Buzz may produce inaccurate information about
         people, places, or facts.{" "}
         <span className="text-button-primary-purple">BotBuzz Version 1.0</span>

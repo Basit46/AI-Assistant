@@ -15,7 +15,7 @@ const UserMessage = ({ msg }: { msg: MessageType }) => {
         </div>
       </div>
 
-      <div className="min-w-[40%] min-h-[56px] border border-[#8692A633] rounded-[12px] bg-[#282A2FDB] p-[20px] flex items-center">
+      <div className="min-w-[40%] min-h-[40px] sm:min-h-[56px] border border-[#8692A633] rounded-[12px] bg-[#282A2FDB] p-[10px] vsm:p-[20px] flex items-center">
         <p className="text-[14px] text-[#F5F5F5]">{msg.content}</p>
       </div>
     </div>

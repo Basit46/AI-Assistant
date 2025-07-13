@@ -51,7 +51,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="relative w-screen h-screen">
+    <div className="relative w-screen min-h-screen">
       <Image
         src="/authBg.jpg"
         fill
@@ -60,7 +60,7 @@ const SignUp = () => {
         className="object-cover"
       />
 
-      <div className="w-full h-full relative z-[2] backdrop-blur-[65px] px-[50px] py-[25px] flex justify-between">
+      <div className="w-full h-full relative z-[2] backdrop-blur-[65px] px-[20px] md:px-[50px] py-[25px] flex justify-between">
         <div className="w-full mx-auto xl:mx-0 md:w-[60%] xl:w-[35%] h-full flex flex-col">
           <div className="flex gap-[8px] items-center">
             <Image src="/logo.png" width={42} height={45} alt="logo" />

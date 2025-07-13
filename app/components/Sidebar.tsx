@@ -41,7 +41,7 @@ const Sidebar = () => {
     <div
       className={`${
         isExpanded ? "w-[118px] xmd:w-[260px]" : "w-[118px] items-center"
-      } relative duration-300 z-[2] h-full flex flex-col px-[20px] bg-[#FFFFFF1A] backdrop-blur-[24px] [box-shadow:0px_4px_17px_0px_#0000000A] border-r-[1.5px] border-r-[#8692A633]`}
+      } relative hidden xmd:flex duration-300 z-[2] h-full flex-col px-[20px] bg-[#FFFFFF1A] backdrop-blur-[24px] [box-shadow:0px_4px_17px_0px_#0000000A] border-r-[1.5px] border-r-[#8692A633]`}
     >
       {/* Toggle Expand Button */}
       <button

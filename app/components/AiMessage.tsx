@@ -1,24 +1,11 @@
 import { MessageType } from "@/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { AiOutlineReload } from "react-icons/ai";
-import { LuCopy, LuCopyCheck, LuThumbsDown, LuThumbsUp } from "react-icons/lu";
-import { formatTimestamp, getGroqChatCompletion } from "../utils";
+import { LuCopy, LuCopyCheck } from "react-icons/lu";
+import { formatTimestamp } from "../utils";
 import ReactMarkdown from "react-markdown";
-import { v4 } from "uuid";
-import { useGlobalStore } from "../store/GlobalStore";
-import { useParams } from "next/navigation";
 
 const AiMessage = ({ msg }: { msg: MessageType }) => {
-  const {
-    messages,
-    deleteMessage,
-    addReactionToMsg,
-    addMessage,
-    setIsLoading,
-  } = useGlobalStore();
-  const { id } = useParams();
-
   //Copying message
   const [isCopied, setIsCopied] = useState(false);
   const handleCopy = () => {
@@ -51,7 +38,7 @@ const AiMessage = ({ msg }: { msg: MessageType }) => {
         </p>
       </div>
 
-      <div className="min-w-[40%] min-h-[56px] border border-[#8692A633] rounded-[16px] bg-[#FFFFFF1A] p-[20px] flex flex-col gap-[10px]">
+      <div className="min-w-[40%] min-h-[56px] border border-[#8692A633] rounded-[16px] bg-[#FFFFFF1A] p-[10px] vsm:p-[20px] flex flex-col gap-[10px]">
         <div className="ai-content prose text-white max-w-full prose-invert">
           <ReactMarkdown>{msg.content}</ReactMarkdown>
         </div>

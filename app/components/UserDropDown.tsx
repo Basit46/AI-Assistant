@@ -25,14 +25,14 @@ export function UserDropDown() {
         className="w-56 p-[8px] bg-[#FFFFFF1A] shadow-[0px_4px_24px_0px_#0000000A] backdrop-blur-[30px] border-none outline-none text-main-white"
         align="end"
       >
-        <DropdownMenuItem className="focus:bg-transparent focus:text-main-white border-b border-b-white rounded-[0px]">
-          <p className="">
+        <DropdownMenuItem className="focus:bg-transparent focus:text-main-white rounded-[0px]">
+          <p className="text-[#6565e1]">
             <span className="capitalize">{user?.email?.slice(0, 1)}</span>
             {user?.email?.slice(1)}
           </p>
         </DropdownMenuItem>
 
-        {/* <DropdownMenuItem
+        <DropdownMenuItem
           className="cursor-pointer"
           onClick={() => router.push("/ai")}
         >
@@ -41,13 +41,13 @@ export function UserDropDown() {
 
         <DropdownMenuItem
           className="cursor-pointer"
-          onClick={() => router.push("/settings")}
+          onClick={() => router.push("/history")}
         >
-          Profile Settings
-        </DropdownMenuItem> */}
+          History
+        </DropdownMenuItem>
 
         <DropdownMenuItem
-          className="cursor-pointer bg-[red] mt-[20px] focus:bg-[red] focus:text-white focus:border-[0.5px] focus:border-gray-400"
+          className="cursor-pointer bg-[red] mt-[10px] focus:bg-[red] focus:text-white focus:border-[0.5px] focus:border-gray-400"
           onClick={() => setOpenLogout(true)}
         >
           Logout

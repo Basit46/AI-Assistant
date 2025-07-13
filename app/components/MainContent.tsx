@@ -21,7 +21,7 @@ const MainContent = ({ children }: { children: React.ReactNode }) => {
         {!hideExtras ? (
           <>
             <Sidebar />
-            <div className="relative flex-1 h-screen ">
+            <div className="relative flex-1 h-screen">
               <Header />
               <div
                 ref={messagesContainerRef}

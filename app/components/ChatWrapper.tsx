@@ -60,7 +60,7 @@ const ChatWrapper = () => {
   }, [id, user, allMessages]);
 
   return (
-    <div className="w-[60%] flex-1 pt-[40px] min-h-[50%]">
+    <div className="w-[90%] xmd:w-[60%] flex-1 pt-[40px] min-h-[50%]">
       <div>
         <div className="relative">
           <div className="w-full h-[1px] bg-[#696F79]"></div>

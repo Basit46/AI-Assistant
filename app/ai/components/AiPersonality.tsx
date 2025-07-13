@@ -14,7 +14,7 @@ export function AiPersonality({ char }: { char: (typeof characters)[0] }) {
   return (
     <Dialog>
       <DialogTrigger>
-        <div className="w-full h-[344px] rounded-[12px] overflow-hidden grid place-items-center p-[1px] bg-[linear-gradient(90deg,_rgba(134,_146,_166,_0.57)_0%,_rgba(52,_56,_64,_0.57)_100%)]">
+        <div className="w-full h-fit xmd:h-[344px] rounded-[12px] overflow-hidden grid place-items-center p-[1px] bg-[linear-gradient(90deg,_rgba(134,_146,_166,_0.57)_0%,_rgba(52,_56,_64,_0.57)_100%)]">
           <div className="w-full h-full bg-[#27292EDB] px-[16px] py-[24px] rounded-[11px] flex flex-col gap-[15px] items-center">
             <div className="size-[80px] rounded-full relative">
               <Image
@@ -51,7 +51,7 @@ export function AiPersonality({ char }: { char: (typeof characters)[0] }) {
         hideCloseBtn
         className="w-[75%] max-w-[75%] h-[70%] flex gap-[10px] p-0 bg-transparent border-none outline-none"
       >
-        <div className="glass-effect w-[30%] h-full rounded-l-[16px] px-[24px] py-[32px] flex flex-col justify-between items-center">
+        <div className="glass-effect w-full xmd:w-[70%] lg:w-[30%] h-full rounded-[16px] lg:rounded-l-[16px] px-[24px] py-[32px] flex flex-col justify-between items-center">
           <div className="flex flex-col items-center">
             <div className="w-[70%] aspect-square rounded-full relative">
               <Image src={char.img} fill className="object-cover" alt="AI" />
@@ -69,7 +69,7 @@ export function AiPersonality({ char }: { char: (typeof characters)[0] }) {
           </Button>
         </div>
 
-        <div className="glass-effect flex-1 h-full rounded-r-[16px] py-[32px] px-[24px] flex flex-col gap-[48px]">
+        <div className="hidden lg:flex glass-effect flex-1 h-full rounded-r-[16px] py-[32px] px-[24px] flex-col gap-[48px]">
           <div className="space-y-[20px]">
             <div className="flex gap-[8px]">
               <p className="w-[64px] font-semibold leading-none">Role</p>
