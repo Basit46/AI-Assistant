@@ -205,7 +205,7 @@ export const greetings = {
     "Chill mode on 🎧",
     "Hope today went well 🍃",
     "Peaceful night ahead 🌌",
-    "Rest easy 😴",
+    "Hello from Basit 😌",
     "Hello again 🌠",
     "Night vibes 🔮",
   ],
